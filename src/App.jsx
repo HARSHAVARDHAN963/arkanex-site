@@ -6,37 +6,40 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, ChevronRight, CheckCircle2, Globe, Sun, Factory, Leaf, Newspaper, Search } from "lucide-react";
+import MetricSpeedometer from "./components/MetricSpeedometer";
+import { img } from "framer-motion/client";
 
 const NAV = [
   { label: "Home", href: "#home" },
-  { label: "Products", href: "#products" },
-  { label: "Solutions", href: "#solutions" },
+  //{ label: "Products", href: "#products" },
+//  { label: "Solutions", href: "#solutions" },
   { label: "Technology", href: "#technology" },
-  { label: "News", href: "#news" },
+//  { label: "News", href: "#news" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
 const SLIDES = [
-  { title: "High‑Efficiency PV for Every Application", subtitle: "Bankable modules and turnkey solutions for utility, commercial and residential." },
-  { title: "Smart Manufacturing at Scale", subtitle: "From wafers to modules — quality controlled, globally certified." },
-  { title: "Partner for the Energy Transition", subtitle: "Reliable EPC, O&M and financing support for faster delivery." },
+  { title: "Solar isn't affordable - Yet!", subtitle: <em>Modules aren't the problem, Balance-of-System is.</em> },
+  { title: "Re-imagine Solar", subtitle: <em>From Manufacturing to Deployment.</em> },
+  { title: "Low-cost, Lightweight Solar", subtitle: <em>With Flexible All-Perovskite Tandem Technology.</em> },
 ];
-
+  
 const PRODUCTS = {
   utility: [
-    { name: "Utility Module U7", tag: "n‑type TOPCon", bullets: ["210mm cells", ">22% efficiency", "1500V system"] },
-    { name: "Utility Module U6", tag: "PERC mono", bullets: ["182mm cells", "High string power", "BOS savings"] },
+    { name: "Transport", image: "/Products/Utility.png", bullets: [""], },
+    { name: "Utility", image: "/Products/Transport.png", bullets: [""], },
   ],
   commercial: [
-    { name: "Commercial C5", tag: "Glass‑glass", bullets: ["Enhanced reliability", "Bifacial gain", "Low LCOE"] },
-    { name: "Commercial C4", tag: "Half‑cut", bullets: ["Shade tolerance", "High yield", "Robust frame"] },
+    { name: "Commercial Rooftops", image: "/Products/Airport.png", bullets: [""] },
+    { name: "Commercial Rooftops", image: "/Products/Curved parking.png", bullets: [""] },
   ],
   residential: [
-    { name: "Residential R4", tag: "All‑black", bullets: ["Elegant aesthetics", "High module efficiency", "25‑yr warranty"] },
-    { name: "Residential R3", tag: "PERC", bullets: ["Excellent low‑light", "Lightweight", "Quick install"] },
+    { name: "Agrivoltaics R4", image: "/Products/Agrivoltaics.png", bullets: [""] },
+    { name: "BIPV R3", image: "/Products/PSM BIPV 2.png", bullets: [""] },
   ],
 };
+
 
 const SOLUTIONS = [
   { icon: <Factory className="h-6 w-6"/>, title: "Utility‑Scale", desc: "GW‑class projects with EPC & O&M." },
@@ -44,6 +47,7 @@ const SOLUTIONS = [
   { icon: <Leaf className="h-6 w-6"/>, title: "BIPV", desc: "Façade and skylight integrations." },
   { icon: <Globe className="h-6 w-6"/>, title: "Off‑Grid", desc: "Hybrid PV + storage for remote sites." },
 ];
+
 
 const NEWS = [
   { title: "Company Achieves New Efficiency Record", date: "2025‑06‑15" },
@@ -67,73 +71,88 @@ export default function App() {
   const [tab, setTab] = React.useState("utility");
 
   return (
-    <div id="home" className="min-h-screen bg-[#0B0F17] text-slate-100">
-      <div className="w-full bg-black text-cyan-300 text-xs sm:text-sm py-2">
-        <div className="mx-auto max-w-7xl px-4 flex items-center justify-between">
-          <span>Arkanex • Flexible PV</span>
-          <div className="flex items-center gap-4">
-            <a href="#" className="underline underline-offset-4">EN</a>
-            <span className="opacity-60">|</span>
-            <a href="#" className="underline underline-offset-4">中文</a>
-          </div>
+    
+   <div id="home" className="min-h-screen bg-[#0B0F17] text-slate-0">
+        <div className="mx-auto max-w-7xl px-4 flex items-left justify-between">
         </div>
-      </div>
+    
 
-      <header className="sticky top-0 z-40 bg-[#0B1220]/80 backdrop-blur border-b border-cyan-900">
-        <div className="mx-auto max-w-7xl h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-sky-500 to-cyan-400 shadow-[0_0_20px_#06b6d4]"/>
-            <span className="font-semibold tracking-tight">Arkanex</span>
+      <header className="sticky top-0 z-40 bg-[#0B0F17]/80 backdrop-blur border-b border-cyan-900">
+        <div className="mx-auto max-w-7xl h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
+          <a href="#home" className="flex items-center gap-20">
+          <img 
+          src="/Logo.png" 
+          alt="Logo" 
+          className="h-12 w-auto object-contain"
+          />
           </a>
-          <nav className="hidden md:flex items-center gap-6">
+
+          <nav className="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
             {NAV.map((l) => (
               <a key={l.label} href={l.href} className="text-sm text-slate-300 hover:text-cyan-300">{l.label}</a>
             ))}
           </nav>
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-7">
             <div className="relative">
-              <Input placeholder="Search" className="pl-8 w-44 bg-slate-900 border-slate-700 text-slate-100 placeholder-slate-400"/>
-              <Search className="h-4 w-4 absolute left-2.5 top-2.5 text-slate-400"/>
+              {/* <Input placeholder="Search" className="pl-8 w-44 bg-slate-900 border-slate-700 text-slate-100 placeholder-slate-400"/>
+              <Search className="h-4 w-4 absolute left-2.5 top-2.5 text-slate-400"/> */}
             </div>
-            <Button className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-[0_0_20px_#22d3ee]">Get a Quote</Button>
+            {/* <Button className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-[0_0_20px_#22d3ee]">Get a Quote</Button> */}
           </div>
           <Button className="md:hidden bg-cyan-500 hover:bg-cyan-400 text-slate-900" size="sm">Menu</Button>
         </div>
       </header>
 
       <section className="relative">
-        <div className="relative h-[60vh] sm:h-[72vh] overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,#172554,transparent_60%)]"/>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b1220]/60 to-[#0B0F17]"/>
-          <div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 lg:px-8 flex items-center">
-            <div>
-              <FadeIn>
-                <Badge className="bg-cyan-500/10 text-cyan-300 border border-cyan-500/40">PV • Modules • EPC</Badge>
-              </FadeIn>
-              <FadeIn delay={0.06}>
-                <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight max-w-3xl">
-                  {SLIDES[slide].title}
-                </h1>
-              </FadeIn>
-              <FadeIn delay={0.12}>
-                <p className="mt-4 text-lg text-slate-300 max-w-2xl">{SLIDES[slide].subtitle}</p>
-              </FadeIn>
-              <FadeIn delay={0.18}>
-                <div className="mt-6 flex gap-3">
-                  <Button className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-[0_0_20px_#22d3ee]">Our Products <ArrowRight className="ml-2 h-4 w-4"/></Button>
-                  <Button variant="outline" className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10">Become a Partner</Button>
-                </div>
-              </FadeIn>
-              <div className="mt-6 flex gap-2">
-                {SLIDES.map((_, i) => (
-                  <button key={i} onClick={() => setSlide(i)} className={`h-2 w-8 rounded-full ${i===slide? 'bg-cyan-400':'bg-cyan-900'}`} />
-                ))}
-              </div>
-            </div>
+        <div className="relative h-screen overflow-hidden">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src="/Re-imagine%20solar.mp4"
+            poster="/Technology/tech1.png"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-black/45"/>
+          <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,#0B0F17,transparent_60%)]"/>
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b1220]/60 to-[#0B0F17]"/>
+    <div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 lg:px-8 flex items-center">
+      <div>
+        <FadeIn>
+          <Badge className="bg-cyan-500/10 text-cyan-300 border border-cyan-500/40">PV • Modules </Badge>
+        </FadeIn>
+        <FadeIn delay={0.12}>
+          <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight max-w-3xl">
+            {SLIDES[slide].title}
+          </h1>
+        </FadeIn>
+        <FadeIn delay={0.12}>
+          <p className="mt-4 text-lg text-slate-300 max-w-2xl">{SLIDES[slide].subtitle}</p>
+        </FadeIn>
+        <FadeIn delay={0.12}>
+          <div className="mt-6 flex gap-3">
+            {/*
+            <Button className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-[0_0_20px_#22d3ee]">Our Products <ArrowRight className="ml-2 h-4 w-4"/></Button>
+            */}
+            {/*
+            <Button variant="outline" className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10">Become a Partner</Button>
+            */}
           </div>
+        </FadeIn>
+        <div className="mt-6 flex gap-2">
+          {SLIDES.map((_, i) => (
+            <button key={i} onClick={() => setSlide(i)} className={`h-2 w-8 rounded-full ${i===slide? 'bg-cyan-400':'bg-cyan-900'}`} />
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
+
+
+{/*
       <section id="products" className="py-20 bg-[#0B1220]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
@@ -146,6 +165,7 @@ export default function App() {
             </div>
           </FadeIn>
 
+          
           <FadeIn delay={0.08}>
             <Tabs value={tab} onValueChange={setTab} className="mt-8">
               <TabsList className="bg-slate-900 border border-cyan-900 text-slate-200">
@@ -187,7 +207,8 @@ export default function App() {
           </FadeIn>
         </div>
       </section>
-
+*/}
+      {/*
       <section id="solutions" className="py-20 bg-[#0A1020]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
@@ -209,12 +230,136 @@ export default function App() {
           </div>
         </div>
       </section>
+      */}
+    <section
+        id="technology"
+        className="relative overflow-hidden bg-[#0B1220] pb-16"
+        style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.9)" }}
+      >
+        <div className="absolute inset-0">
+          <video
+            className="h-full w-full object-cover"
+            src="/Technology/bg%20video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-[#0B1220]/70" />
+        </div>
 
+        <div className="relative z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+            <div className="rounded-2xl border border-white/20 bg-white/15 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.35)] p-8">
+              <FadeIn>
+                <div className="flex flex-col">
+                  <h2 className="text-4xl font-semibold tracking-tight text-White-100 mb-6 text-center">
+                    TECHNOLOGY
+                  </h2>
+
+                  <div className="flex flex-col lg:flex-row gap-12 items-start">
+                    <div className="lg:w-[100%]">
+                      <p className="text-2xl font-semibold text-White-100 text-center">
+                        Flexible All-Perovskite Tandem Technology
+                      </p>
+
+                      <p className="mt-3 text-lg font-semibold text-White-100 text-center">
+                        Ultra low-cost, lightweight solar on any surface without mounts
+                      </p>
+
+                      <p className="mt-3 text-sm leading-relaxed text-White-100 text-center">
+                        Flexible stick-on weighing &lt;3kg per/m2. Unlocking low-cost solar for traditional utility solar and additionally for new markets as well.
+                      </p>
+
+                      <p className="mt-4 text-base font-semibold text-White-100 text-center">
+                        10x lighter <span className="px-6 text-White-100 text-center">|</span>
+                        2x faster to install
+                        <span className="px-6 text-White-100 text-center">|</span>
+                        30% more efficient
+                      </p>
+
+                      <div className="mt-2 relative -ml-4 sm:-ml-8 lg:-ml-9">
+                        <img
+                          src="/Technology/Technology%20Features_V1.png"
+                          alt="Technology features"
+                          className="w-full h-auto object-contain"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {/* Image + text rows */}
+            <FadeIn delay={0.1}>
+              <div className="mt-20 space-y-6">
+                <div className="flex flex-col lg:flex-row gap-6 items-center py-10">
+                  <div className="lg:w-1/2">
+                    <h3 className="text-2xl font-semibold text-slate-100">Perovskite</h3>
+                    <p className="mt-3 text-slate-300 text-justify">
+                      Perovskites are a new class of semiconductors made from abundant, low cost materials that exhibit remarkable light absorption properties. Their ABX3 crystal structure allows countless
+                      cation-anion combinations that tune their optical and electronic properties. Unlike traditional silicon, their crystal structure can be engineered at the molecular level and deposited at low temperatures.
+                       Because perovskites absorb light so efficiently and can be chemically tailored for optimal performance, they have already surpassed silicon in certified laboratory efficiencies  representing one of the most significant breakthroughs in solar materials in decades.
+
+                    </p>
+                  </div>
+                  <video
+                    className="w-full lg:w-1/2 h-auto object-contain rounded-lg border border-cyan-900 bg-slate-900/40"
+                    src="/Technology/Perovskite%20video.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </div>
+
+                <div className="flex flex-col lg:flex-row gap-6 items-center py-10">
+                  <img
+                    src="/Technology/tech1.png"
+                    alt="Roll-to-Roll (R2R) Manufacturing"
+                    className="w-full lg:w-1/2 h-auto object-contain rounded-lg border border-cyan-900 bg-slate-900/40"
+                  />
+                  <div className="lg:w-1/2 ">
+                    <h3 className="text-2xl font-semibold text-slate-100 ">Roll-to-Roll (R2R) Manufacturing</h3>
+                    <p className="mt-10 text-slate-300 text-justify">
+                      Roll-to-roll manufacturing unlocks the true cost potential of perovskite solar. Unlike rigid silicon wafers, perovskite cells can be fabricated on flexible transparent plastic substrates using printable inks and ultrathin layers just hundreds of nanometers thick.
+                      This enables a fully continuous production line, from layer depositions and scribing to lamination, with dramatically higher throughput and lower capex. The result: manufactured at lower cost and delivered as an ultrathin, flexible film that can be applied almost anywhere like a sticker.
+                      By simplifying mounting hardware, it cuts labor, transportation, and balance-of-system expenses across the entire installation chain.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col lg:flex-row gap-6 items-center py-10">
+                  <div className="lg:w-[50%]">
+                    <h3 className="text-2xl font-semibold text-slate-100">Tandem cell design</h3>
+                    <p className="mt-10 text-slate-300 text-justify">
+                      All perovskite tandem architectures unlock efficiency levels that single-junction silicon simply can’t reach. By stacking two perovskite layers tuned to different parts of the solar spectrum, these tandem architectures deliver significantly more power per square meter.
+                      The smaller land footprint translates directly into fewer modules, less land and lower project costs. And while our focus is on all-perovskite tandems, the same architecture can also be paired with silicon when required.
+                      In a world where land is scarce and rising in value, tandem turns spectral efficiency into real economic advantage.
+
+                    </p>
+                  </div>
+                  <img
+                    src="/Technology/tech2.png"
+                    alt="Tandem cell design"
+                    className="ml-auto w-full lg:w-[38%] h-auto object-contain rounded-lg border border-cyan-900 bg-slate-900/40"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+{/*
       <section id="technology" className="py-20 bg-[#0B1220]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 items-center">
           <FadeIn>
             <div>
-              <h2 className="text-3xl font-semibold tracking-tight">Technology & Quality</h2>
+              <h2 className="text-3xl font-semibold tracking-tight">Technology </h2>
               <p className="mt-4 text-slate-300">From cell design to module packaging, we optimize for lifetime energy yield through advanced materials, automated manufacturing, and rigorous reliability testing.</p>
               <ul className="mt-6 space-y-3 text-slate-200">
                 <li className="flex gap-2 items-start"><CheckCircle2 className="h-5 w-5 text-cyan-400"/> Multi‑busbar & half‑cut architectures</li>
@@ -238,8 +383,59 @@ export default function App() {
           </FadeIn>
         </div>
       </section>
+*/}
+  <section id="products" className="py-10 bg-[#0B1220]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="flex items-end justify-between gap-6 flex-wrap">
+              <div>
+                <h2 className="text-3xl font-semibold ">Products</h2>
+                <p className="mt-3 text-slate-300 max-w-2xl">Our Technology unlocks solar solutions for Roof-tops, Facades, Transport and Terrains including areas where Silicon simply can’t go.</p>
+              </div>
+            </div>
+          </FadeIn>
 
-      <section id="news" className="py-20 bg-[#0A1020]">
+          
+          <FadeIn delay={0.08}>
+            <Tabs value={tab} onValueChange={setTab} className="mt-8">
+              <TabsList className="bg-slate-900 border border-cyan-900 text-slate-200 ">
+                 <TabsTrigger value="residential" className="hover:text-cyan-400 hover:bg-cyan-900/10 transition-colors">AgriVoltaics & BIPV</TabsTrigger>
+                <TabsTrigger value="utility" className="hover:text-cyan-400 hover:bg-cyan-900/10 transition-colors">Utility</TabsTrigger>
+                <TabsTrigger value="commercial" className="hover:text-cyan-400 hover:bg-cyan-900/10 transition-colors">Commercial RoofTops</TabsTrigger>
+              </TabsList>
+              {Object.entries(PRODUCTS).map(([key, arr]) => (
+                <TabsContent key={key} value={key} className="mt-8">
+                  <div className="grid gap-2 md:grid-cols-2">
+                    {arr.map((p) => (
+                      <Card key={p.name} className="bg-slate-900/60 border border-cyan-900 hover:shadow-[0_0_24px_#0ea5e9] transition overflow-hidden">
+                        <div className="h-30 bg-slate-900 object-cover flex items-center justify-center">
+                          <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
+                        </div>
+                        <CardHeader>
+                          <div className="flex items-center justify-between">
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <ul className="space-y-2 text-slate-200">
+                           
+
+                          </ul>
+                          <div className="pt-0">
+                            
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </FadeIn>
+        </div>
+</section>
+
+{/* News Section 
+<section id="news" className="py-20 bg-[#0A1020]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <FadeIn>
@@ -271,19 +467,22 @@ export default function App() {
           </div>
         </div>
       </section>
+*/}    
 
-      <section id="about" className="py-20 bg-[#0B1220]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 items-start">
+    <section id="about" className="py-20 bg-[#0B1220]">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 items-start">
           <FadeIn>
             <Card className="bg-slate-900/60 border border-cyan-900">
               <CardContent className="p-6">
                 <h3 className="text-2xl font-semibold text-slate-100">About Us</h3>
-                <p className="mt-3 text-slate-300">We are a photovoltaic company providing high‑efficiency modules, EPC services, and energy solutions.</p>
-                <ul className="mt-4 space-y-2 text-slate-200">
-                  <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-cyan-400"/> Vertically integrated value chain</li>
-                  <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-cyan-400"/> Global service network</li>
-                  <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-cyan-400"/> Bankable track record</li>
-                </ul>
+                <p className="mt-3 text-slate-300">Arkanex is led by a team that blends deep-tech expertise with strategic execution. We have over a decade of experience in the field working in EU-funded research projects, and similar startups to M&A strategy, we’ve built a company that understands both the science and the scale.</p>
+                <div className="mt-6 space-y-4 text-slate-200">
+                  <Button variant="outline" className="border-cyan-500 text-cyan-300 hover:bg-cyan-500 font-normal !h-9 !px-5 text-sm">
+                    <a href="https://scholar.google.com/citations?user=7NesiPYAAAAJ&hl=en" target="_blank" rel="noreferrer">
+                      Our Publications
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </FadeIn>
@@ -292,15 +491,15 @@ export default function App() {
               <CardContent className="p-6">
                 <h3 className="text-2xl font-semibold text-slate-100">Contact</h3>
                 <p className="mt-3 text-slate-300">Send us a note and our team will respond shortly.</p>
-                <form className="mt-4 space-y-3" action="mailto:hello@arkanex.example" method="POST" encType="text/plain">
+                <form className="mt-4 space-y-3" action="mailto:harsha@arkanextech.com" method="POST" encType="text/plain">
                   <Input name="name" placeholder="Your name" required className="bg-slate-900 border-slate-700 text-slate-100 placeholder-slate-400"/>
                   <Input type="email" name="email" placeholder="Email" required className="bg-slate-900 border-slate-700 text-slate-100 placeholder-slate-400"/>
                   <Input name="company" placeholder="Company" className="bg-slate-900 border-slate-700 text-slate-100 placeholder-slate-400"/>
                   <Input name="country" placeholder="Country" className="bg-slate-900 border-slate-700 text-slate-100 placeholder-slate-400"/>
                   <textarea name="message" placeholder="Project details / questions" className="w-full min-h-[120px] rounded-md bg-slate-900 border border-slate-700 p-2 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-600"></textarea>
                   <div className="flex gap-3">
-                    <Button type="submit" className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-[0_0_20px_#22d3ee]">Send</Button>
-                    <Button variant="outline" className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10">Download Brochure</Button>
+                    <Button type="submit" className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 shadow-[0_0_5px_#22d3ee] !h-9 !px-5 text-sm">Send</Button>
+                    {/*<Button variant="outline" className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/10" >Download Brochure</Button>*/}
                   </div>
                 </form>
               </CardContent>
@@ -314,36 +513,36 @@ export default function App() {
           <div className="grid gap-10 md:grid-cols-5">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-sky-500 to-cyan-400 shadow-[0_0_18px_#06b6d4]"/>
-                <span className="font-semibold text-slate-100">Arkanex</span>
+                <a href="#home" className="flex items-center gap-20">
+                  <img 
+                    src="/Logo.png" 
+                    alt="Logo" 
+                    className="h-12 w-auto object-contain"
+                  />
+                </a>
               </div>
               <p className="mt-4 text-sm text-slate-400 max-w-sm">High‑efficiency photovoltaic products and solutions for a net‑zero future.</p>
             </div>
-            <div>
-              <div className="font-medium text-slate-200">Products</div>
-              <ul className="mt-3 space-y-2 text-sm text-slate-400">
-                <li><a href="#products" className="hover:text-cyan-300">Utility</a></li>
-                <li><a href="#products" className="hover:text-cyan-300">Commercial</a></li>
-                <li><a href="#products" className="hover:text-cyan-300">Residential</a></li>
-              </ul>
-            </div>
+
             <div>
               <div className="font-medium text-slate-200">Company</div>
               <ul className="mt-3 space-y-2 text-sm text-slate-400">
                 <li><a href="#about" className="hover:text-cyan-300">About</a></li>
-                <li><a href="#news" className="hover:text-cyan-300">News</a></li>
+                {/*<li><a href="#news" className="hover:text-cyan-300">News</a></li>*/}
                 <li><a href="#contact" className="hover:text-cyan-300">Contact</a></li>
               </ul>
             </div>
             <div>
-              <div className="font-medium text-slate-200">Resources</div>
+              <div className="font-medium text-slate-200"></div>
               <ul className="mt-3 space-y-2 text-sm text-slate-400">
+                {/*
                 <li><a href="#technology" className="hover:text-cyan-300">Datasheets</a></li>
                 <li><a href="#technology" className="hover:text-cyan-300">Certificates</a></li>
-                <li><a href="#solutions" className="hover:text-cyan-300">EPC Services</a></li>
+                <li><a href="#solutions" className="hover:text-cyan-300">EPC Services</a></li>*/}
               </ul>
             </div>
-          </div>
+           </div>
+
           <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-xs text-slate-500">
             <div>© {new Date().getFullYear()} Arkanex. All rights reserved.</div>
             <div className="flex gap-4">
@@ -355,5 +554,5 @@ export default function App() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

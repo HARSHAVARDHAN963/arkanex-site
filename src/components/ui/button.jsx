@@ -9,8 +9,8 @@ export function Button({ className = '', variant = 'default', size = 'default', 
     ghost: 'text-cyan-300 hover:bg-cyan-500/10 focus:ring-cyan-600 focus:ring-offset-slate-900'
   }
   const sizes = {
-    default: 'h-10 px-4 py-2',
-    sm: 'h-8 px-3'
+    default: 'h-14 px-4 py-2',
+    sm: 'h-12 px-3'
   }
   return <button className={clsx(base, variants[variant], sizes[size], className)} {...props} />
 }
