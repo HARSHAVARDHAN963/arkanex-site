@@ -108,7 +108,7 @@ export default function App() {
           <video
             className="absolute inset-0 h-full w-full object-cover"
             src="/Re-imagine%20solar.mp4"
-            poster="/Technology/tech1.png"
+            
             autoPlay
             loop
             muted
